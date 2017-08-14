@@ -9,27 +9,45 @@
     <body>
       <main>
         <div class="container">
+          <BR><BR>
             <div class="row">
               <div class="col-md-12">
-                <div class="card blue-gray">
-                    <div class="card-content white-text" id="chat">
-                        <p><span id="red-text">Notice:</span> This is how we do it.</p><hr>
+                <div class="card">
+                  <h4 class="card-header">Chat window</h4>
+                    <div class="card-body" id="chat">
+                        <span class="alert alert-info chat-alert">Notice: This is how we do it.</span>
+                        <p><span class="text-primary chat-text">Player:</span> A message from this guy...</span></p>
                     </div>
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="form-row" id="chatform">
+              <div class="col-10">
+                <input type="text" placeholder="Write a message to your opponent..." class="form-control" id="chat-msg">
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-outline-info form-control" id="send-btn">Send</button>
+              </div>
+            </div>
+            <div class="row align-items-center rps-controls">
                 <div class="col-md-6">
                   <div id="p1form">
-                    <form class="center-align">
-                      <input type="text" placeholder="Username" name='username' id="p1nameinput">
-                      <button type="submit" id="p1join">Join</button>
+                    <h3 class="text-center"><small class="text-muted">Player 1</small></h3>
+                    <form>
+                      <div class="form-row">
+                        <div class="col-9"><input type="text" class="form-control" placeholder="Username" name='username' id="p1nameinput"></div><div class="col"><button type="button" class="btn btn-outline-info form-control" id="p1join">Join</button></div>
+                      </div>
                     </form>
                   </div>
-                  <div class="invisible" id="p1play">
-                    <h6 class="text-center center-align" id="p1username">Player 1</h6>
+                  <div id="p1play">
+                    <h3 class="text-center"><small class="text-muted">Player 1</small></h3>
+
+                    <div class="form-row">
+                      <div class="col-4"><button type="button" class="btn btn-outline-info form-control" id="p1-rock-btn">Rock</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control" id="p1-paper-btn">Paper</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control" id='p1-scissors-btn'>Scissors</button></div>
+                    </div>
+                    <br>
                     <table class="table">
-                      <thead>
+                      <thead class="thead-default">
                         <tr>
                           <th>Name:</th>
                           <th>Wins:</th>
@@ -51,15 +69,20 @@
                 </div>
                 <div class="col-md-6">
                   <div id="p2form">
+                    <h3 class="text-center"><small class="text-muted">Player 2</small></h3>
                     <form>
-                      <input type="text" placeholder="Username" name='username' id="p2nameinput">
-                      <button type="submit" id="p2join">Join</button>
+                      <div class="form-row">
+                        <div class="col-9"><input type="text" class="form-control" placeholder="Username" name='username' id="p2nameinput"></div><div class="col"><button type="button" class="btn btn-outline-info form-control" id="p2join">Join</button></div>
+                      </div>
                     </form>
                   </div>
-                  <div class="invisible" id="p2play">
-                    <h6 class="text-center center-align" id="p1username">Player 1</h6>
+                  <div id="p2play">
+                    <div class="form-row">
+                      <div class="col-4"><button type="button" class="btn btn-outline-info form-control" id="p2-rock-btn">Rock</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control" id="p2-paper-btn">Paper</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control" id='p2-scissors-btn'>Scissors</button></div>
+                    </div>
+                    <h6 class="text-center center-align" id="p2username">Player 2</h6>
                     <table class="table">
-                      <thead>
+                      <thead class="thead-default">
                         <tr>
                           <th>Name:</th>
                           <th>Wins:</th>

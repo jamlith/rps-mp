@@ -1,5 +1,14 @@
 #chat {
   height: 400px;
   overflow-y: scroll;
-  
+
+}
+.chat-text{
+  padding-left: 10px;
+}
+.chat-alert {
+  display: block;
+}
+.rps-controls {
+  height: 220px;
 }

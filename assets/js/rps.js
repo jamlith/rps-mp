@@ -13,11 +13,11 @@ var userid = null;
 var fb = {
 	uid: null,
 	db: firebase.database(),
-	cxRef: this.db.ref('cxs/'),
-	msgRef: this.db.ref('msgs/'),
-	usrRef: this.db.ref('users/'),
-	moveRef: this.db.ref('moves/'),
-	conRef: this.db.ref('.info/connected'),
+	cxRef: null,
+	msgRef: null,
+	usrRef: null,
+	moveRef: null,
+	conRef: null,
 	p1name: false,
 	p2name: false,
 	wins: 0,
@@ -26,7 +26,12 @@ var fb = {
 	init: function() {
 		// this is just to set initial values and set listeners where needed
 		// listen for disconnections
-		this.conRef.on('value', function(data) {
+		var cxRef = this.db.ref('cxs/');
+		var msgRef = this.db.ref('msgs/');
+		var usrRef = this.db.ref('users/');
+		var moveRef = this.db.ref('moves/');
+		var conRef = this.db.ref('.info/connected');
+		conRef.on('value', function(data) {
 			// if connected
 			if (data.val()) {
 				// add user to connections
@@ -38,7 +43,7 @@ var fb = {
 			}
 		});
 		//listen for players joining
-		this.usrRef.on('child_added', function(snapshot) {
+		usrRef.on('child_added', function(snapshot) {
 			if (snapshot.val().player1.exists()) {
 				this.p1name = snapshot.val().player1.name;
 				$('#p1form').fadeOut();
@@ -59,7 +64,7 @@ var fb = {
 			}
 		});
 		//listen for players leaving
-		this.usrRef.on('child_removed', function(snapshot) {
+		usrRef.on('child_removed', function(snapshot) {
 			if (! snapshot.child('player1').exists()) {
 			 this.p1name = null;
 			 $('#p1play').fadeOut();
@@ -82,6 +87,7 @@ var fb = {
 	},
 	bindName: function(pnum, name) {
 		// Assigns the player number and nickname to the user
+		var usrRef = this.db.ref('users/')
 		if (pnum == 1 && this.p1name == false) {
 			this.p1name = name;
 			var usr = this.usrRef.push({ 'player1': { 'name': name, 'id': this.uid, 'wins': 0, 'losses': 0, 'ties': 0 }});
@@ -89,7 +95,7 @@ var fb = {
 			usr.onDisconnect().remove();
 		} else if (pnum == 2 && this.p2name == false) {
 			this.p2name = name;
-			var usr = this.usrRef.push({ 'player2': { 'name': name, 'id': this.uid, 'wins': 0, 'losses': 9; 'ties': 0 }});
+			var usr = this.usrRef.push({ 'player2': { 'name': name, 'id': this.uid, 'wins': 0, 'losses': 9, 'ties': 0 }});
 			// delete this entry upon disconnect
 			usr.onDisconnect().remove();
 		} else {
@@ -101,10 +107,12 @@ var fb = {
 		// updates UI when scores change
 		$('#p' + pnum + 'winlabel').text(wins);
 		$('#p' + pnum + 'losslabel').text(losses);
-		$('#p' + pnum + 'tielabel'.text(ties);
+		$('#p' + pnum + 'tielabel').text(ties);
 	},
 	makeMove: function(move) {
 		// registers a users decision, commits it to the db
+		var usrRef = this.db.ref('users/');
+		var moveRef = this.db.ref('moves/');
 		usrRef.once('value').then(function(snapshot) {
 			if (snapshot.child('player1').exists() && this.uid == snapshot.child('player1').child('id').val()) {
 				moveRef.set({ 'player1': move });
@@ -113,9 +121,11 @@ var fb = {
 				moveRef.set({ 'player2': move });
 				// TODO: Display the selection for the user that made it (somehow)
 			}
-		},
+		});
+	},
 		printMessage: function(authid, msg, timestamp, effects) {
 			var authorName;
+			var usrRef = this.db.ref("users/");
 			usrRef.once('value').then(function(snapshot) {
 				if (snapshot.child('player1').exists() && snapshot.child('player2').exists()) {
 					if (snapshot.val().player1.id == authid) {
@@ -129,4 +139,13 @@ var fb = {
 			});
 		}
 	}
-}
+	$("#p1play").hide();
+	$("#p2play").hide();
+	$("chatform").hide();
+
+$("#p1join").click(function(event) {
+	var nick=$("#p1nameinput");
+	if (nick == "" || nick == undefined) {
+		nick = "Anon1"
+	}
+});
