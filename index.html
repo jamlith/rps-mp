@@ -15,8 +15,6 @@
                 <div class="card">
                   <h4 class="card-header">Chat window</h4>
                     <div class="card-body" id="chat">
-                        <span class="alert alert-info chat-alert">Notice: This is how we do it.</span>
-                        <p><span class="text-primary chat-text">Player:</span> A message from this guy...</p>
                     </div>
                 </div>
               </div>
@@ -32,13 +30,13 @@
             <div class="row align-items-center rps-controls">
                 <div class="col-md-6">
                   <div id="p1-input">
-                    <h3 class="text-center"><small class="text-muted" id="p1-labels">Player 1</small></h3>
+                    <h3 class="text-center"><small class="text-muted">Player 1</small></h3>
                       <div class="form-row">
                           <div class="col-9"><input type="text" class="form-control" placeholder="Username" name='username' id="p1-name"></div><div class="col"><button type="button" class="btn btn-outline-info form-control join-buttons" id="p1-join">Join</button></div>
                       </div>
                   </div>
                   <div id="p1-controls">
-                    <h3 class="text-center" id="p1-labels"><small class="text-muted">Player 1</small></h3>
+                    <h3 class="text-center"><small class="text-muted">Player 1</small></h3>
 
                     <div class="form-row">
                       <div class="col-4"><button type="button" class="btn btn-outline-info form-control p1-buttons" id="p1-rock">Rock</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control p1-buttons" id="p1-paper">Paper</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control p1-buttons" id="p1-scissors">Scissors</button></div>
@@ -67,7 +65,7 @@
                 </div>
                 <div class="col-md-6">
                   <div id="p2-input">
-                    <h3 class="text-center"><small class="text-muted p2-labels">Player 2</small></h3>
+                    <h3 class="text-center"><small class="text-muted">Player 2</small></h3>
                     <form>
                       <div class="form-row">
                         <div class="col-9"><input type="text" class="form-control" placeholder="Username" name='username' id="p2-name"></div><div class="col"><button type="button" class="btn btn-outline-info form-control" id="p2-join">Join</button></div>
@@ -75,10 +73,11 @@
                     </form>
                   </div>
                   <div id="p2-controls">
+                    <h3 class="text-center"><small class="text-muted">Player 2</small></h3>
+                    <BR>
                     <div class="form-row">
-                      <div class="col-4"><button type="button" class="btn btn-outline-info form-control p2-buttons" id="p2-rock">Rock</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control p2-buttons" id="p2-paper">Paper</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control" id='p2-scissors-btn'>Scissors</button></div>
+                      <div class="col-4"><button type="button" class="btn btn-outline-info form-control p2-buttons" id="p2-rock">Rock</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control p2-buttons" id="p2-paper">Paper</button></div><div class="col-4"><button type="button" class="btn btn-outline-info form-control p2-buttons" id='p2-scissors'>Scissors</button></div>
                     </div>
-                    <h3 class="text-center"><small class="text-muted p2-labels">Player 2</small></h3>
                     <table class="table">
                       <thead class="thead-default">
                         <tr>
@@ -90,7 +89,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td id="p2-labels">N/A</td>
+                          <td class="p2-labels">N/A</td>
                           <td id="p2-wins">0</td>
                           <td id="p2-losses">0</td>
                           <td id="p2-ties">0</td>
