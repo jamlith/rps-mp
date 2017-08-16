@@ -17,6 +17,8 @@ var rps = {
     p2losses: null,
     p2ties: null
 };
+var p1_moved = false;
+var p2_moved = false;
 // varibale for the local client, username,id, slotnum
 var uname = null;
 var uid = null;
@@ -158,10 +160,14 @@ function init() {
             // if both users have registered a move
             if (ss.child('slot1').exists() && ss.child('slot2').exists()) {
                 // if user 1 chose rock
+                $('.p1-buttons').removeClass('active');
+                $('.p2-buttons').removeClass('active');
+                p1_moved = false;
+                p2_moved = false;
                 if (ss.val().slot1 == 'Rock') {
                     // and user 2 chose rock
                     if (ss.val().slot2 == 'Rock') {
-                        // Notify users that it was a tie, update score
+                        // Notify users that it was a tie, update score, remove the moves from the moves list
                         outputMessage('Rock vs Rock... round ended in a tie!  Make your next move...');
                         rps.p1ties++;
                         rps.p2ties++;
@@ -360,6 +366,10 @@ $('#p2-join').click(function(event) {
 		bindUser(2, name_input);
 });
 $('#p1-rock').click(function(event) {
+    if (!p1_moved) {
+        p1_moved = true;
+        $('#p1-rock').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot1').exists()) {
             moveRef.update({'slot1': 'Rock'});
@@ -373,6 +383,10 @@ $('#p1-rock').click(function(event) {
     });
 });
 $('#p2-rock').click(function(event) {
+    if (!p2_moved) {
+        p2_moved = true;
+        $('#p2-rock').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot2').exists()) {
             moveRef.update({'slot2': 'Rock'});
@@ -386,6 +400,10 @@ $('#p2-rock').click(function(event) {
     });
 });
 $('#p1-paper').click(function(event) {
+    if (!p1_moved) {
+        p1_moved = true;
+        $('#p1-paper').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot1').exists()) {
             moveRef.update({'slot1': 'Paper'});
@@ -399,6 +417,10 @@ $('#p1-paper').click(function(event) {
     });
 });
 $('#p2-paper').click(function(event) {
+    if (!p2_moved) {
+        p2_moved = true;
+        $('#p2-paper').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot2').exists()) {
             moveRef.update({'slot2': 'Paper'});
@@ -412,6 +434,10 @@ $('#p2-paper').click(function(event) {
     });
 });
 $('#p1-scissors').click(function(event) {
+    if (!p1_moved) {
+        p1_moved = true;
+        $('#p1-scissors').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot1').exists()) {
             moveRef.update({'slot1': 'Scissors'});
@@ -425,6 +451,10 @@ $('#p1-scissors').click(function(event) {
     });
 });
 $('#p2-scissors').click(function(event) {
+    if (!p2_moved) {
+        p2_moved = true;
+        $('#p2-scissors').addClass('active');
+    }
     moveRef.once('value').then(function(ss) {
         if (!ss.child('slot2').exists()) {
             moveRef.update({'slot2': 'Scissors'});
